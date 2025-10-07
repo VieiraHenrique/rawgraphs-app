@@ -1,5 +1,3 @@
-version: "3.7"
-
 services:
   rawgraphs:
     # 'build: .' indique à Dokploy de construire l'image
