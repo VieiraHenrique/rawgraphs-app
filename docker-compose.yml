@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  rawgraphs:
+    # 'build: .' indique à Dokploy de construire l'image
+    # en utilisant le Dockerfile présent dans le même dossier.
+    build: .
+    restart: always
+    networks:
+      - dokploy-network
+    labels:
+      - "traefik.enable=true"
+      # Remplacez "rawgraphs" par un nom unique pour votre projet
+      - "traefik.http.routers.rawgraphs.rule=Host(`rawgraphs.votredomaine.com`)"
+      - "traefik.http.routers.rawgraphs.entrypoints=websecure"
+      - "traefik.http.routers.rawgraphs.tls.certresolver=letsencrypt"
+      # Nginx écoute sur le port 80 par défaut
+      - "traefik.http.services.rawgraphs.loadbalancer.server.port=80"
+
+networks:
+  dokploy-network:
+    external: true
