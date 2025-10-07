@@ -8,14 +8,15 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 
-# CORRECTION APPLIQUÉE ICI ⬇️
-# Construire l'application pour la production en activant le support legacy d'OpenSSL
+# Construire l'application pour la production
 RUN NODE_OPTIONS=--openssl-legacy-provider yarn build
 
 # --- Étape 2 : Création de l'image finale ---
 FROM nginx:stable-alpine
 
-COPY --from=builder /app/out /usr/share/nginx/html
+# CORRECTION APPLIQUÉE ICI ⬇️
+# Copier le dossier "build" (et non "out") qui contient les fichiers finaux
+COPY --from=builder /app/build /usr/share/nginx/html
 
 EXPOSE 80
 
