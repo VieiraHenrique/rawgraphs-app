@@ -11,7 +11,7 @@ services:
     labels:
       - "traefik.enable=true"
       # Remplacez "rawgraphs" par un nom unique pour votre projet
-      - "traefik.http.routers.rawgraphs.rule=Host(`rawgraphs.votredomaine.com`)"
+      - "traefik.http.routers.rawgraphs.rule=Host(`rawgraphs.widoapps.com`)"
       - "traefik.http.routers.rawgraphs.entrypoints=websecure"
       - "traefik.http.routers.rawgraphs.tls.certresolver=letsencrypt"
       # Nginx écoute sur le port 80 par défaut
